@@ -15,7 +15,14 @@ class SignupView extends StatelessWidget {
         Container(
           height: Responsive.height(400),
           decoration: BoxDecoration(
-            color: Colors.purpleAccent,
+            gradient: LinearGradient(
+              colors: [
+                Colors.deepPurple,
+                Colors.purpleAccent,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(30),
               bottomRight: Radius.circular(30),
