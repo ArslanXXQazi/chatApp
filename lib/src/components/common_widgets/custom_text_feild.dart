@@ -19,13 +19,15 @@ class CustomTextFeild extends StatelessWidget {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
-        label: BlackText(text: labelText,textColor: Colors.grey,fontSize: 12,),
+        filled: true,
+        fillColor: Colors.white70,
+        hint: BlackText(text: labelText,textColor: Colors.grey,fontSize: 12,),
         border:OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(50),
             borderSide: BorderSide(color: Colors.grey)
         ),
         focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(500),
             borderSide: BorderSide(color: Colors.purpleAccent)
         ),
         prefixIcon: Icon(prefixIcon,size: 20,color: Colors.grey,),
