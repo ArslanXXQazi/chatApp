@@ -1,9 +1,14 @@
 import 'package:chatapp/src/components/common_widgets/custom_text.dart';
+import 'package:chatapp/src/components/common_widgets/custom_text_feild.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class SignupView extends StatelessWidget {
-  const SignupView({super.key});
+   SignupView({super.key});
+
+   final TextEditingController nameController = TextEditingController();
+   final TextEditingController emailController = TextEditingController();
+   final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +18,7 @@ class SignupView extends StatelessWidget {
       body: Stack(children: [
 
         Container(
-          height: Responsive.height(400),
+          height: Responsive.height(350),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
@@ -47,7 +52,7 @@ class SignupView extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 20),
               padding: EdgeInsetsGeometry.all(20),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(.9),
+                color: Colors.white.withOpacity(.8),
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: [
                   BoxShadow(
@@ -59,23 +64,26 @@ class SignupView extends StatelessWidget {
                 ],
               ),
               child: Column(children: [
-                TextFormField(
-                  decoration: InputDecoration(
-                    label: BlackText(text: "Enter Name",textColor: Colors.grey,fontSize: 12,),
-                    border:OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.grey)
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.purpleAccent)
-                    ),
-                    prefixIcon: Icon(LucideIcons.user,size: 20,color: Colors.grey,),
 
 
-                  ),
-                )
-
+                CustomTextFeild(
+                    labelText: "Enter Name",
+                    controller: nameController,
+                    prefixIcon: LucideIcons.user),
+                SizedBox(height: Responsive.height(20)),
+                CustomTextFeild(
+                    labelText: "Enter Email",
+                    controller: emailController,
+                    prefixIcon: LucideIcons.mail),
+                SizedBox(height: Responsive.height(20)),
+                CustomTextFeild(
+                    labelText: "Enter Password",
+                    controller: passwordController,
+                    prefixIcon: LucideIcons.lock,
+                    suffixIcon: LucideIcons.eye,
+                ),
+                SizedBox(height: Responsive.height(30)),
+                
               ],),
             )
 
