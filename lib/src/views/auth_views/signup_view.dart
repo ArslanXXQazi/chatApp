@@ -83,7 +83,20 @@ class SignupView extends StatelessWidget {
                     suffixIcon: LucideIcons.eye,
                 ),
                 SizedBox(height: Responsive.height(30)),
-                
+                ElevatedButton(
+                    onPressed: (){},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.purpleAccent,
+                      minimumSize: Size(double.infinity, Responsive.height(40)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadiusGeometry.circular(10),
+                      )
+                    ),
+                    child: BlackText(
+                      text: "Sign Up",
+                      textColor: Colors.white,
+                    )
+                )
               ],),
             )
 
