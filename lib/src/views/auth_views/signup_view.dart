@@ -1,5 +1,6 @@
 import 'package:chatapp/src/components/common_widgets/custom_text.dart';
 import 'package:chatapp/src/components/common_widgets/custom_text_feild.dart';
+import 'package:chatapp/src/views/auth_views/sign_in_view.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
@@ -110,7 +111,9 @@ class SignupView extends StatelessWidget {
                         fontSize: 14,
                       ),
                       BlackText(
-                        onTap: (){},
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SignInView()));
+                        },
                         text: "Sign In",
                         fontSize: 14,
                         textColor: Colors.purpleAccent,

@@ -1,12 +1,12 @@
 import 'package:chatapp/src/components/common_widgets/custom_text.dart';
 import 'package:chatapp/src/components/common_widgets/custom_text_feild.dart';
+import 'package:chatapp/src/views/auth_views/signup_view.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class SignInView extends StatelessWidget {
   SignInView({super.key});
 
-  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -41,10 +41,10 @@ class SignInView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(Icons.add_reaction_sharp,size: 50,color: Colors.white),
+                  Icon(Icons.chat,size: 50,color: Colors.white),
                   SizedBox(height: Responsive.height(20)),
                   BlackText(
-                    text: "Create Account",
+                    text: "Login",
                     textColor: Colors.white,
                     fontSize: 30,
                     fontWeight: FontWeight.w700,
@@ -68,12 +68,13 @@ class SignInView extends StatelessWidget {
                     ),
                     child: Column(children: [
 
+                      BlackText(
+                        text: "Welcome Back",
+                        textColor: Colors.purpleAccent,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700,
+                      ),
 
-                      CustomTextFeild(
-                          labelText: "Enter Name",
-                          controller: nameController,
-                          prefixIcon: LucideIcons.user),
-                      SizedBox(height: Responsive.height(20)),
                       CustomTextFeild(
                           labelText: "Enter Email",
                           controller: emailController,
@@ -96,7 +97,7 @@ class SignInView extends StatelessWidget {
                               )
                           ),
                           child: BlackText(
-                            text: "Sign Up",
+                            text: "Sign In",
                             textColor: Colors.white,
                           )
                       ),
@@ -106,12 +107,14 @@ class SignInView extends StatelessWidget {
                         children: [
 
                           BlackText(
-                            text: "Already have an account? ",
+                            text: "Don't have an account? ",
                             fontSize: 14,
                           ),
                           BlackText(
-                            onTap: (){},
-                            text: "Sign In",
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>SignupView()));
+                            },
+                            text: "Sign Up",
                             fontSize: 14,
                             textColor: Colors.purpleAccent,
                           ),
