@@ -126,7 +126,7 @@ class SignInView extends StatelessWidget {
                           ),
                           BlackText(
                             onTap: (){
-                              context.go('/');
+                              context.go('/signUp');
                             },
                             text: "Sign Up",
                             fontSize: 14,
