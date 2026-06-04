@@ -37,7 +37,7 @@ dependencies:
   google_fonts:
   lucide_icons_flutter:
   go_router:
-  get:   
+  get: ^4.7.2
 
 dev_dependencies:
   flutter_test:
