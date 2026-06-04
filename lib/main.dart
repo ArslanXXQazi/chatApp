@@ -1,3 +1,4 @@
+import 'package:chatapp/src/router/app_router.dart';
 import 'package:chatapp/src/views/auth_views/signup_view.dart';
 import 'package:flutter/material.dart';
 
@@ -11,12 +12,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: SignupView(),
+      debugShowCheckedModeBanner: false,
+      routerDelegate: AppRouter.route.routerDelegate,
+      routeInformationProvider: AppRouter.route.routeInformationProvider,
+      routeInformationParser: AppRouter.route.routeInformationParser,
+
+
+
     );
   }
 }
