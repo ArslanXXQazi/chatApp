@@ -1,4 +1,5 @@
 import 'package:chatapp/src/components/common_widgets/custom_toast.dart';
+import 'package:chatapp/src/router/app_router.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,6 +17,33 @@ class AuthController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController confirmPassController = TextEditingController();
+
+
+  //login function starts
+  void login() async
+  {
+
+    try
+    {
+      isLoading.value=true;
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passController.text
+      );
+
+      AppRouter.route.go('/inbox');
+      CustomToast.show(message: "Login Successfully");
+      clear();
+      isLoading.value=false;
+
+    }
+    catch(e)
+    {
+      CustomToast.show(message: "${e.toString()}",isError: true);
+      isLoading.value=false;
+    }
+
+  }
 
   // SignUp Function Starts
   void signUp() async {

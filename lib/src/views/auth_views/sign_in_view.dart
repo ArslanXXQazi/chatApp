@@ -93,22 +93,28 @@ class SignInView extends StatelessWidget {
                         isPassword: true,
                       ),
                       SizedBox(height: Responsive.height(30)),
-                      ElevatedButton(
-                          onPressed: (){
-                            context.go('sdscd');
-                          },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.purpleAccent,
-                              minimumSize: Size(double.infinity, Responsive.height(40)),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadiusGeometry.circular(50),
-                              )
-                          ),
-                          child: BlackText(
-                            text: "Sign In",
-                            textColor: Colors.white,
-                          )
-                      ),
+                      Obx((){
+                        return  ElevatedButton(
+                            onPressed: (){
+                              if(authController.FormKey.currentState!.validate())
+                              {
+                                authController.login();
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.purpleAccent,
+                                minimumSize: Size(double.infinity, Responsive.height(40)),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadiusGeometry.circular(50),
+                                )
+                            ),
+                            child: authController.isLoading.value? Center(child: CircularProgressIndicator(color: Colors.white)):
+                            BlackText(
+                              text: "Sign In",
+                              textColor: Colors.white,
+                            )
+                        );
+                      }),
                       SizedBox(height: Responsive.height(10)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
