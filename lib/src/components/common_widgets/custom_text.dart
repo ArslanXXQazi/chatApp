@@ -62,26 +62,35 @@ class BlackText extends StatelessWidget {
     //===========>>> Initialize Responsive utility
     Responsive.init(context);
 
-    return InkWell(
-      //===========>>> Tappable text container
-      onTap: onTap,
-      child: Text(
-        //===========>>> Display text or empty string
-        text ?? "",
-        textAlign: textAlign ?? TextAlign.start,
-        maxLines: maxLines,
-        overflow: overflow,
-        style: GoogleFonts.poppins(
-          //===========>>> Responsive font size
-          fontSize: fontSize != null
-              ? Responsive.fontSize(fontSize!)
-              : Responsive.fontSize(16), // Default font size scaled
-          fontWeight: fontWeight ?? FontWeight.w500,
-          color: textColor ?? Theme.of(context).textTheme.bodyMedium?.color,
-          height: height,
-          letterSpacing: letterSpacing,
-        ),
+    final double? scaledLetterSpacing = letterSpacing != null
+        ? Responsive.fontSize(letterSpacing!)
+        : null;
+
+    final Widget textWidget = Text(
+      //===========>>> Display text or empty string
+      text ?? "",
+      textAlign: textAlign ?? TextAlign.start,
+      maxLines: maxLines,
+      overflow: overflow,
+      style: GoogleFonts.poppins(
+        //===========>>> Responsive font size
+        fontSize: fontSize != null
+            ? Responsive.fontSize(fontSize!)
+            : Responsive.fontSize(16), // Default font size scaled
+        fontWeight: fontWeight ?? FontWeight.w500,
+        color: textColor ?? Theme.of(context).textTheme.bodyMedium?.color,
+        height: height,
+        letterSpacing: scaledLetterSpacing,
       ),
     );
+
+    if (onTap != null) {
+      return InkWell(
+        onTap: onTap,
+        child: textWidget,
+      );
+    }
+
+    return textWidget;
   }
 }
