@@ -1,4 +1,5 @@
 
+import 'package:chatapp/src/components/common_widgets/error_widget.dart';
 import 'package:chatapp/src/views/auth_views/sign_in_view.dart';
 import 'package:chatapp/src/views/auth_views/signup_view.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,7 +28,7 @@ class AppRouter
   ],
     errorBuilder: (context , state )
     {
-      return ErrorWidget()
+      return CustomErrorWidget(text: state.error.toString());
     }
   );
 

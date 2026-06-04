@@ -89,7 +89,9 @@ class SignInView extends StatelessWidget {
                       ),
                       SizedBox(height: Responsive.height(30)),
                       ElevatedButton(
-                          onPressed: (){},
+                          onPressed: (){
+                            context.go('sdscd');
+                          },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.purpleAccent,
                               minimumSize: Size(double.infinity, Responsive.height(40)),
