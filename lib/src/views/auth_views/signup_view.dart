@@ -85,7 +85,7 @@ class SignupView extends StatelessWidget {
                         labelText: "Enter Password",
                         controller: passwordController,
                         prefixIcon: LucideIcons.lock,
-                        suffixIcon: LucideIcons.eye,
+                        isPassword: true,
                     ),
                     SizedBox(height: Responsive.height(30)),
                     ElevatedButton(
