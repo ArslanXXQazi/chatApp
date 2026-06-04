@@ -122,7 +122,7 @@ class SignupView extends StatelessWidget {
                                   borderRadius: BorderRadiusGeometry.circular(50),
                                 )
                             ),
-                            child: authController.isLoading.value? CircularProgressIndicator():
+                            child: authController.isLoading.value? Center(child: CircularProgressIndicator(color: Colors.white,)):
                             BlackText(
                               text: "Sign Up",
                               textColor: Colors.white,

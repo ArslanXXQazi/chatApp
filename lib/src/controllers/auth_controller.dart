@@ -32,7 +32,8 @@ class AuthController extends GetxController {
         "Account created successfully",
         snackPosition: SnackPosition.BOTTOM,
       );
-      print(userCredential.user?.uid);
+      print("USER ID ======>>> ${userCredential.user?.uid}");
+      print("================= ACCOUNT CREATED SUCCESSFULLY===================");
       isLoading.value=false;
     }
     catch(e)
@@ -41,8 +42,9 @@ class AuthController extends GetxController {
       print(e.toString());
       Get.snackbar(
         "Error",
-        "Account Creation Failed",
-        snackPosition: SnackPosition.BOTTOM,
+        "${e.toString()}",
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red
       );
     }
 
