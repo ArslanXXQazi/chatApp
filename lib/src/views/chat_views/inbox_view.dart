@@ -1,4 +1,5 @@
 import 'package:chatapp/src/components/common_widgets/custom_text.dart';
+import 'package:chatapp/src/components/common_widgets/user_card.dart';
 import 'package:flutter/material.dart';
 
 class InboxView extends StatelessWidget {
@@ -16,6 +17,15 @@ class InboxView extends StatelessWidget {
           fontSize: 16,
           textColor: Colors.white,
         ),
+      ),
+      body: ListView.builder(
+          itemCount: 6,
+          itemBuilder: (context, index)
+          {
+            return UserCard(
+
+            );
+          }
       ),
     );
   }
