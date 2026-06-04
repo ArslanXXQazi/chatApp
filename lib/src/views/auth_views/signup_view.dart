@@ -1,12 +1,18 @@
 import 'package:chatapp/src/components/common_widgets/custom_text.dart';
 import 'package:chatapp/src/components/common_widgets/custom_text_feild.dart';
+import 'package:chatapp/src/controllers/auth_controller.dart';
 import 'package:chatapp/src/views/auth_views/sign_in_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class SignupView extends StatelessWidget {
    SignupView({super.key});
+
+
+   final AuthController authController = Get.put(AuthController());
 
    final TextEditingController nameController = TextEditingController();
    final TextEditingController emailController = TextEditingController();
@@ -15,6 +21,7 @@ class SignupView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Responsive.init(context);
+    Get.put(AuthController());
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
