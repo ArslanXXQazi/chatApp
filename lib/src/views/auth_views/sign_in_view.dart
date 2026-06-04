@@ -17,7 +17,9 @@ class SignInView extends StatelessWidget {
     Responsive.init(context);
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
+      body: Form(
+          key: authController.FormKey,
+          child:  SingleChildScrollView(
         child: Stack(children: [
 
           Container(
@@ -80,11 +82,13 @@ class SignInView extends StatelessWidget {
                       CustomTextFeild(
                           labelText: "Enter Email",
                           controller: authController.emailController,
+                          validator: authController.validateEmail,
                           prefixIcon: LucideIcons.mail),
                       SizedBox(height: Responsive.height(20)),
                       CustomTextFeild(
                         labelText: "Enter Password",
                         controller: authController.passController,
+                        validator: authController.validatePassword,
                         prefixIcon: LucideIcons.lock,
                         isPassword: true,
                       ),
@@ -131,7 +135,7 @@ class SignInView extends StatelessWidget {
             ),
           )
         ],),
-      ),
+      )),
     );
   }
 }
