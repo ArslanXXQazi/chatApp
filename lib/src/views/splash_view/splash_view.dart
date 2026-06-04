@@ -1,5 +1,6 @@
 import 'package:chatapp/src/components/common_widgets/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -12,7 +13,9 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration(seconds: 3));
+    Future.delayed(Duration(seconds: 3),(){
+      context.go('/signIn');
+    });
   }
   @override
   Widget build(BuildContext context) {
