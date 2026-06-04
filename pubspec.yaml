@@ -36,7 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   google_fonts:
   lucide_icons_flutter:
-  go_router:   
+  go_router:
+  get:   
 
 dev_dependencies:
   flutter_test:
