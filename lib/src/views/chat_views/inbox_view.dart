@@ -23,7 +23,7 @@ class InboxView extends StatelessWidget {
           itemBuilder: (context, index)
           {
             return UserCard(
-
+              name: "qazi",
             );
           }
       ),

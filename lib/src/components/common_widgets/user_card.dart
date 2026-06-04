@@ -3,7 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class UserCard extends StatelessWidget {
-  const UserCard({super.key});
+
+  final String name;
+
+  const UserCard({super.key, required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,6 @@ class UserCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(children: [
-        
         CircleAvatar(
           radius: Responsive.width(25),
           backgroundColor: Colors.purpleAccent,
@@ -33,13 +35,12 @@ class UserCard extends StatelessWidget {
         SizedBox(width: Responsive.width(15)),
         Expanded(
           child: BlackText(
-            text: "Arslan Qazi",
+            text:name,
             fontSize: 16,
             fontWeight: FontWeight.w700,
 
           ),
         )
-
       ],),
     );
   }
