@@ -107,25 +107,28 @@ class SignupView extends StatelessWidget {
                           isPassword: true,
                       ),
                       SizedBox(height: Responsive.height(30)),
-                      ElevatedButton(
-                          onPressed: (){
-                            if(authController.FormKey.currentState!.validate())
+                      Obx((){
+                        return ElevatedButton(
+                            onPressed: (){
+                              if(authController.FormKey.currentState!.validate())
                               {
-                                context.go("/signIn");
+                                authController.signUp();
                               }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.purpleAccent,
-                            minimumSize: Size(double.infinity, Responsive.height(40)),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadiusGeometry.circular(50),
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.purpleAccent,
+                                minimumSize: Size(double.infinity, Responsive.height(40)),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadiusGeometry.circular(50),
+                                )
+                            ),
+                            child: authController.isLoading.value? CircularProgressIndicator():
+                            BlackText(
+                              text: "Sign Up",
+                              textColor: Colors.white,
                             )
-                          ),
-                          child: BlackText(
-                            text: "Sign Up",
-                            textColor: Colors.white,
-                          )
-                      ),
+                        );
+                      }),
                       SizedBox(height: Responsive.height(10)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

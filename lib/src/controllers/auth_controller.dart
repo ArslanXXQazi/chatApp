@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +13,42 @@ class AuthController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController confirmPassController = TextEditingController();
+
+
+
+  // SignUp Function Starts
+  void signUp () async
+  {
+    try{
+      isLoading.value=true;
+      UserCredential userCredential =
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passController.text
+      );
+      clear();
+      Get.snackbar(
+        "Success",
+        "Account created successfully",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      print(userCredential.user?.uid);
+      isLoading.value=false;
+    }
+    catch(e)
+    {
+      isLoading.value=false;
+      print(e.toString());
+      Get.snackbar(
+        "Error",
+        "Account Creation Failed",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+
+  }
+
+
 
 
   String? validateEmail(String? value ){
@@ -67,4 +105,15 @@ class AuthController extends GetxController {
   void togglePasswordVisibility (){
     isPasswordVisible.value = !isPasswordVisible.value;
   }
+
+
+
+   void clear (){
+
+    nameController.clear();
+    emailController.clear();
+    passController.clear();
+    confirmPassController.clear();
+
+   }
 }
