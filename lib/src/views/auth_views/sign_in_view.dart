@@ -1,14 +1,16 @@
 import 'package:chatapp/src/components/common_widgets/custom_text.dart';
 import 'package:chatapp/src/components/common_widgets/custom_text_feild.dart';
+import 'package:chatapp/src/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class SignInView extends StatelessWidget {
   SignInView({super.key});
 
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final AuthController authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -77,12 +79,12 @@ class SignInView extends StatelessWidget {
                       SizedBox(height: Responsive.height(10)),
                       CustomTextFeild(
                           labelText: "Enter Email",
-                          controller: emailController,
+                          controller: authController.emailController,
                           prefixIcon: LucideIcons.mail),
                       SizedBox(height: Responsive.height(20)),
                       CustomTextFeild(
                         labelText: "Enter Password",
-                        controller: passwordController,
+                        controller: authController.passController,
                         prefixIcon: LucideIcons.lock,
                         isPassword: true,
                       ),
