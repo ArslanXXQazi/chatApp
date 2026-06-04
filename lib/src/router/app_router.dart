@@ -25,6 +25,10 @@ class AppRouter
         }
     ),
   ],
+    errorBuilder: (context , state )
+    {
+      return ErrorWidget()
+    }
   );
 
 }
