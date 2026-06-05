@@ -23,8 +23,36 @@ class ChatController extends GetxController {
 
 
   // 1. Chat Room ID banane ka unique logic (Dono IDs ko sort kar ke combine karna)
-  
+  String getChatRoomId(String user1, String user2)
+  {
+    return user1.compareTo(user2)<0? "${user1}_$user2" : "${user2}_$user1";
+  }
 
+  // 2. Message Send karne ka function
+  void sendMessage(String receiverId, String messageText) async
+  {
+    if(messageText.trim().isEmpty) return;
+
+    try
+    {
+      String currentUserId = _auth.currentUser?.uid ?? "";
+      String chatRoomId = getChatRoomId(currentUserId, receiverId);
+
+      // 'chat_rooms' -> 'room_id' -> 'messages' (sub-collection)
+      await _firebaseFirestore.collection("chat_rooms").doc(chatRoomId).collection("messages").add({
+
+        "sender_id":currentUserId,
+        "receiver_id":receiverId,
+        "messages": messageText.trim(),
+        "timestamp": FieldValue.serverTimestamp(),
+
+      });
+    }
+    catch (e) {
+      print("Error sending message: ${e.toString()}");
+    }
+
+  }
 
 
 
