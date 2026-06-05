@@ -1,4 +1,5 @@
 import 'package:chatapp/src/components/common_widgets/custom_text.dart';
+import 'package:chatapp/src/services/get_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,7 +15,15 @@ class _SplashViewState extends State<SplashView> {
     // TODO: implement initState
     super.initState();
     Future.delayed(Duration(seconds: 3),(){
-      context.go('/signIn');
+
+      if(!mounted) return;
+
+      String? userId = GetStorageService.getUserId();
+      if (userId != null && userId.isNotEmpty) {
+        context.go('/inbox');
+      } else {
+        context.go('/signIn');
+      }
     });
   }
   @override

@@ -42,6 +42,7 @@ dependencies:
   lucide_icons_flutter:
   go_router:
   get: ^4.7.2
+  get_storage:
 
 dev_dependencies:
   flutter_test:

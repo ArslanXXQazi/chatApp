@@ -1,12 +1,11 @@
 import 'package:chatapp/src/components/common_widgets/custom_toast.dart';
 import 'package:chatapp/src/router/app_router.dart';
+import 'package:chatapp/src/services/get_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// Yahan apni custom toast file ko import zaroor kar lena
-// import 'package:your_app_name/widgets/custom_toast.dart';
+
 
 class AuthController extends GetxController {
   var isPasswordVisible = false.obs;
@@ -26,11 +25,14 @@ class AuthController extends GetxController {
     try
     {
       isLoading.value=true;
+      UserCredential userCredential=
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passController.text
       );
 
+      String uid = userCredential.user!.uid;
+      GetStorageService.saveUserId(uid);
       AppRouter.route.go('/inbox');
       CustomToast.show(message: "Login Successfully");
       clear();
@@ -56,11 +58,10 @@ class AuthController extends GetxController {
       );
 
       String uid = userCredential.user!.uid;
-
       await userData(uid);
+      GetStorageService.saveUserId(uid);
       CustomToast.show(message: "Account Created Successfully");
       clear();
-
       print("USER ID ======>>> ${userCredential.user?.uid}");
       print("================= ACCOUNT CREATED SUCCESSFULLY===================");
       isLoading.value = false;
@@ -73,6 +74,7 @@ class AuthController extends GetxController {
     }
   }
 
+  // user data function
   userData(String uid) async {
     try {
       await FirebaseFirestore.instance.collection('userData').doc(uid).set({
@@ -83,6 +85,28 @@ class AuthController extends GetxController {
       });
     } catch (e) {
       print(e.toString());
+    }
+  }
+
+  // Logout Function Starts
+  void logout() async {
+    try {
+      isLoading.value = true;
+
+      // 1. Firebase se sign out karo
+      await FirebaseAuth.instance.signOut();
+
+      // 2. GetStorage se user ID delete karo
+      await GetStorageService.deleteUserId();
+
+
+      AppRouter.route.go('/signIn');
+
+      CustomToast.show(message: "Logged Out Successfully");
+      isLoading.value = false;
+    } catch (e) {
+      isLoading.value = false;
+      CustomToast.show(message: "Logout Error: ${e.toString()}", isError: true);
     }
   }
 
