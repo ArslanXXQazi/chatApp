@@ -1,5 +1,6 @@
 import 'package:chatapp/src/components/common_widgets/custom_text.dart';
 import 'package:chatapp/src/components/common_widgets/user_card.dart';
+import 'package:chatapp/src/controllers/auth_controller.dart';
 import 'package:chatapp/src/controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ class InboxView extends StatelessWidget {
    InboxView({super.key});
 
   final ChatController _chatController = Get.put(ChatController());
+  final AuthController _authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,13 @@ class InboxView extends StatelessWidget {
             fontSize: 16,
             textColor: Colors.white,
           );
-        })
+        }),
+        actions: [
+          _authController.isLoading.value ? CircularProgressIndicator(color: Colors.white) :
+          IconButton(onPressed: (){
+            _authController.logout();
+          }, icon: Icon(Icons.logout,color: Colors.white,size: 25))
+        ],
       ),
       body: Obx((){
 

@@ -1,4 +1,5 @@
 import 'package:chatapp/src/components/common_widgets/custom_toast.dart';
+import 'package:chatapp/src/controllers/chat_controller.dart';
 import 'package:chatapp/src/router/app_router.dart';
 import 'package:chatapp/src/services/get_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,7 +17,6 @@ class AuthController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController confirmPassController = TextEditingController();
-
 
   //login function starts
   void login() async
@@ -99,6 +99,9 @@ class AuthController extends GetxController {
       // 2. GetStorage se user ID delete karo
       await GetStorageService.deleteUserId();
 
+      await Get.delete<AuthController>(force: true);
+
+      await Get.delete<ChatController>(force: true);
 
       AppRouter.route.go('/signIn');
 
@@ -109,6 +112,8 @@ class AuthController extends GetxController {
       CustomToast.show(message: "Logout Error: ${e.toString()}", isError: true);
     }
   }
+
+
 
   String? validateEmail(String? value) {
     if (value == null || value.trim().isEmpty) {
