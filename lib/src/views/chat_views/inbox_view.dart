@@ -59,7 +59,7 @@ class InboxView extends StatelessWidget {
         itemBuilder: (context,index){
          var userData = _chatController.userList[index];
          return UserCard(
-           name: userData['user_name']?? "N/A",
+           userData: userData,
          );
         },
       );

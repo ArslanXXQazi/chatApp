@@ -5,16 +5,17 @@ import 'package:go_router/go_router.dart';
 
 class UserCard extends StatelessWidget {
 
-  final String name;
+  final Map<String,dynamic> userData;
 
-  const UserCard({super.key, required this.name});
+  const UserCard({super.key, required this.userData});
 
   @override
   Widget build(BuildContext context) {
+    String name = userData['user_name'] ?? "N/A";
     Responsive.init(context);
     return GestureDetector(
       onTap: () {
-        context.go("/chatDetail", extra: userData);
+        context.push("/chatDetail", extra: userData);
       },
       child: Container(
         padding: const EdgeInsetsGeometry.symmetric(horizontal: 20,vertical: 12),

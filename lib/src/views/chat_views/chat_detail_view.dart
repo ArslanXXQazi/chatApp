@@ -3,6 +3,7 @@ import 'package:chatapp/src/controllers/chat_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_bubbles/chat_bubbles.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:go_router/go_router.dart';
@@ -56,12 +57,42 @@ class _ChatDetailViewState extends State<ChatDetailView> {
               children: [
                 // 1. Messages ki List (Scrollable Area)
                 Expanded(
-                  child: ListView(
-                    padding: const EdgeInsets.all(8.0),
-                    children:  [
-                      
-                    ],
-                  ),
+                  child: Obx((){
+
+                   if(_chatController.chatMessages.isEmpty)
+                     {
+                       return Column(
+                         mainAxisAlignment: MainAxisAlignment.center,
+                         children: const [
+                           Icon(Icons.message_outlined, size: 50, color: Colors.grey),
+                           SizedBox(height: 10),
+                           Center(child: BlackText(text: "No Messages Found")),
+                         ],
+                       );
+                     }
+
+                   return ListView.builder(
+                     padding: EdgeInsets.only(top: 20),
+                     itemCount: _chatController.chatMessages.length,
+                     itemBuilder: (context, index){
+                       var msgData = _chatController.chatMessages[index];
+                       // Check karo: Agar message bhejne wala main hoon toh true, warna false
+                       bool isMe = msgData['sender_id'] == currentUserId;
+                       return BubbleSpecialThree(
+                         seen: true,
+                         text: msgData["message"] ?? "",
+                         color: isMe ? Colors.purpleAccent : const Color(0xFFE8E8EE),
+                         tail: true,
+                         isSender: isMe,
+                         textStyle: GoogleFonts.poppins(
+                             color: isMe ? Colors.white : Colors.black,
+                             fontSize: 15),
+                       );
+
+                     },
+                   );
+
+                  })
                 ),
 
                 // 2. Message likhne wali Bar
@@ -76,10 +107,7 @@ class _ChatDetailViewState extends State<ChatDetailView> {
                     print("Message Typed: $message");
                     print("=====================");
 
-
-                    setState(() {
-                      typedMsg=message;
-                    });
+                    _chatController.sendMessage(receiverId, message);
 
                   },
                 ),

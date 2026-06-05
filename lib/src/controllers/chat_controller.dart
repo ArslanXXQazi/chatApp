@@ -43,7 +43,7 @@ class ChatController extends GetxController {
 
         "sender_id":currentUserId,
         "receiver_id":receiverId,
-        "messages": messageText.trim(),
+        "message": messageText.trim(),
         "timestamp": FieldValue.serverTimestamp(),
 
       });
@@ -56,25 +56,26 @@ class ChatController extends GetxController {
 
   // 3. Messages ko real-time stream (listen) karne ka function
 
-  void listenToMessages(String receiverId) async
-  {
-
+  void listenToMessages(String receiverId) {
     String currentUserId = _auth.currentUser?.uid ?? "";
     String chatRoomId = getChatRoomId(currentUserId, receiverId);
-    
-    try
-    {
-      await _firebaseFirestore.collection("chat_rooms").
-      doc(chatRoomId).collection("messages").orderBy("timestamp",descending: false).
-      snapshots().listen((snapshot){
-        List<Map<String,dynamic>> temporalMessages = [];
-        chatMessages.value = temporalMessages;
-      });
-    }
-    catch (e) {
-      print("Error sending message: ${e.toString()}");
-    }
-    
+
+    _firebaseFirestore.collection("chat_rooms")
+        .doc(chatRoomId)
+        .collection("messages")
+        .orderBy("timestamp", descending: false)
+        .snapshots()
+        .listen((snapshot) {
+
+      List<Map<String, dynamic>> temporalMessages = [];
+
+      // FIX: Loop laga kar data nikalna zaroori hy 🚀
+      for (var doc in snapshot.docs) {
+        temporalMessages.add(doc.data());
+      }
+
+      chatMessages.value = temporalMessages;
+    });
   }
 
 
