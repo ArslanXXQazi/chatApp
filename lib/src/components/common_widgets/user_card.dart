@@ -1,6 +1,7 @@
 import 'package:chatapp/src/components/common_widgets/custom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class UserCard extends StatelessWidget {
 
@@ -12,7 +13,9 @@ class UserCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Responsive.init(context);
     return GestureDetector(
-      onTap: (){},
+      onTap: (){
+        context.go("/chatDetail");
+      },
       child: Container(
         padding: const EdgeInsetsGeometry.symmetric(horizontal: 20,vertical: 12),
         margin: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),

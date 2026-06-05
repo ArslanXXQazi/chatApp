@@ -2,6 +2,7 @@
 import 'package:chatapp/src/components/common_widgets/error_widget.dart';
 import 'package:chatapp/src/views/auth_views/sign_in_view.dart';
 import 'package:chatapp/src/views/auth_views/signup_view.dart';
+import 'package:chatapp/src/views/chat_views/chat_detail_view.dart';
 import 'package:chatapp/src/views/chat_views/inbox_view.dart';
 import 'package:chatapp/src/views/splash_view/splash_view.dart';
 import 'package:flutter/cupertino.dart';
@@ -39,6 +40,13 @@ class AppRouter
         builder: (BuildContext context, GoRouterState state)
         {
           return InboxView();
+        }
+    ),
+    GoRoute(
+        path: "/chatDetail",
+        builder: (BuildContext context, GoRouterState state)
+        {
+          return ChatDetailView();
         }
     ),
   ],
