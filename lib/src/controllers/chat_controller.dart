@@ -51,7 +51,30 @@ class ChatController extends GetxController {
     catch (e) {
       print("Error sending message: ${e.toString()}");
     }
+  }
 
+
+  // 3. Messages ko real-time stream (listen) karne ka function
+
+  void listenToMessages(String receiverId) async
+  {
+
+    String currentUserId = _auth.currentUser?.uid ?? "";
+    String chatRoomId = getChatRoomId(currentUserId, receiverId);
+    
+    try
+    {
+      await _firebaseFirestore.collection("chat_rooms").
+      doc(chatRoomId).collection("messages").orderBy("timestamp",descending: false).
+      snapshots().listen((snapshot){
+        List<Map<String,dynamic>> temporalMessages = [];
+        chatMessages.value = temporalMessages;
+      });
+    }
+    catch (e) {
+      print("Error sending message: ${e.toString()}");
+    }
+    
   }
 
 

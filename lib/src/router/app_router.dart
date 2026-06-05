@@ -42,11 +42,13 @@ class AppRouter
           return InboxView();
         }
     ),
+
     GoRoute(
         path: "/chatDetail",
         builder: (BuildContext context, GoRouterState state)
         {
-          return ChatDetailView();
+         final userData = state.extra as Map<String,dynamic>;
+         return ChatDetailView(userData: userData,);
         }
     ),
   ],

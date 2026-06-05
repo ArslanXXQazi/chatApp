@@ -13,8 +13,8 @@ class UserCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Responsive.init(context);
     return GestureDetector(
-      onTap: (){
-        context.go("/chatDetail");
+      onTap: () {
+        context.go("/chatDetail", extra: userData);
       },
       child: Container(
         padding: const EdgeInsetsGeometry.symmetric(horizontal: 20,vertical: 12),
