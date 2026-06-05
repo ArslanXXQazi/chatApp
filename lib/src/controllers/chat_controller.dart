@@ -10,6 +10,15 @@ class ChatController extends GetxController {
   var isLoading = false.obs;
   var currentUserName = "".obs;
 
+  // Real-time messages store karne ke liye RxList 📱
+  var chatMessages = <Map<String,dynamic>>[].obs;
+
+
+  
+
+
+
+
   @override
   void onInit() {
     super.onInit();
