@@ -1,4 +1,4 @@
-import 'package:chatapp/firebase_options.dart';
+import 'package:chatapp/firebase_options.d
 import 'package:chatapp/src/router/app_router.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
