@@ -32,4 +32,8 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       routerDelegate: AppRouter.route.routerDelegate,
-      
+      routeInformationProvider: AppRouter.route.routeInformationProvider,
+      routeInformationParser: AppRouter.route.routeInformationParser,
+    );
+  }
+}
